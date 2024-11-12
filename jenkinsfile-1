@@ -13,5 +13,13 @@ pipeline {
                 echo "----Application build successfully---------"
             }
         }
+        stage("executing testcases")
+            steps {
+              echo "-------- Executing Testcases --------"
+              sh "mvn test"
+              echo "-------- Testcases Execution Complete --------"
+            
+            }
+        } 
     }
 }
