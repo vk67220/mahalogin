@@ -1,16 +1,17 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("checkout code"){
-            steps{
+    stages {
+        stage("checkout code") {
+            steps {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vk67220/mahalogin.git']])
             }
         }
-        stage("building application")
-            steps{
+        stage("building application") {
+            steps {
                 echo "--------------building application"
                 sh "mvn clean package"
                 echo "----Application build successfully---------"
             }
+        }
     }
 }
