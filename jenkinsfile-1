@@ -9,7 +9,7 @@ pipeline{
         stage("building application")
             steps{
                 echo "--------------building application"
-                mvn clean package
+                sh "mvn clean package"
                 echo "----Application build successfully---------"
             }
     }
