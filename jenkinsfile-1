@@ -1,25 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage("checkout code") {
+        stage("Checkout Code") {
             steps {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vk67220/mahalogin.git']])
             }
         }
-        stage("building application") {
+        stage("Building Application") {
             steps {
                 echo "--------------building application"
                 sh "mvn clean package"
                 echo "----Application build successfully---------"
             }
         }
-        stage("executing testcases")
+        stage("Executing Testcases") {
             steps {
-              echo "-------- Executing Testcases --------"
-              sh "mvn test"
-              echo "-------- Testcases Execution Complete --------"
-            
+                echo "-------- Executing Testcases --------"
+                sh "mvn test"
+                junit '**/target/surefire-reports/TEST-*.xml'
+                echo "-------- Testcases Execution Complete --------"
             }
-        } 
+        }
     }
 }
