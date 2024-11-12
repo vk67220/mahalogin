@@ -1,9 +1,10 @@
 pipeline{
     agent any
-    stages {
-    stage("checkout code") {
-      steps {
-        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vk67220/mahalogin.git']])
+    stages{
+        stage("checkout code"){
+            steps{
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vk67220/mahalogin.git']])
+            }
+        }
     }
-
 }
