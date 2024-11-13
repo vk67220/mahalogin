@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo "-------- Building Docker Image --------"
                 sh """
-                    docker build -t mahalogin:${App_Version} -f /var/lib/docker/Dockerfile
+                    docker build -t mahalogin:${App_Version} -f /var/lib/docker/Dockerfile .
                     echo "-------- Image Successfully Built --------"
                 """
             }
