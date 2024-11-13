@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    environment {
+        App_Version = "1.0" // You can adjust the version as needed
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+    }
     stages {
         stage("Checkout Code") {
             steps {
@@ -13,12 +20,13 @@ pipeline {
                 echo "----Application build successfully---------"
             }
         }
-        stage("Executing Testcases") {
+        stage("Building Docker Image") {
             steps {
-                echo "-------- Executing Testcases --------"
-                sh "mvn test"
-                junit '**/target/surefire-reports/TEST-*.xml'
-                echo "-------- Testcases Execution Complete --------"
+                echo "-------- Building Docker Image --------"
+                sh """
+                    docker build -t mahalogin:${App_Version} .
+                    echo "-------- Image Successfully Built --------"
+                """
             }
         }
     }
